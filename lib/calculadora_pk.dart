@@ -7,10 +7,18 @@ class Calculator {
   int addOne(int value) => value + 1;
 
 void openCalculator() {
-runApp(MaterialApp(
-      home: CalculatorScreen(),
-    ));
+  runApp(CalculatorApp());
 }
+}
+
+class CalculatorApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Calculator',
+      home: CalculatorScreen(),
+    );
+  }
 }
 
 class CalculatorScreen extends StatefulWidget {
@@ -20,7 +28,7 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String _currentValue = '';
-  String _displayValue = '';
+  String _displayValue = '0';
   double _result = 0;
   String _operator = '';
 
@@ -56,7 +64,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = operator;
       _currentValue = '';
-      _displayValue = _result.toString();
     }
   }
 
@@ -81,14 +88,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = '';
       _currentValue = '';
-      _displayValue = _result.toString();
     }
+
+    setState(() {
+      _displayValue = _result.toString();
+    });
   }
 
   void _handleClearPress() {
     setState(() {
       _currentValue = '';
-      _displayValue = '';
+      _displayValue = '0';
       _result = 0;
       _operator = '';
     });
@@ -172,6 +182,5 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 }
-
 
 
