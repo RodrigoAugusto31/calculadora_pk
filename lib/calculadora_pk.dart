@@ -6,9 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 class Calculator {
   /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
-}
 
-void abrirCalculadora() async {
+  void abrirCalculadora() async {
   const url = 'calculator:';
   // ignore: deprecated_member_use
   if (await canLaunch(url)) {
@@ -18,3 +17,6 @@ void abrirCalculadora() async {
     throw 'Não foi possível abrir a calculadora.';
   }
 }
+}
+
+
