@@ -6,8 +6,11 @@ class Calculator {
   /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
 
-void openCalculator() {
-  runApp(CalculatorApp());
+void openCalculator(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => CalculatorApp()),
+  );
 }
 }
 
