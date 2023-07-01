@@ -15,7 +15,6 @@ class CalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.yellow),
       title: 'Flutter Calculator',
       home: CalculatorScreen(),
     );
@@ -175,9 +174,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             ],
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.yellow, // Definindo a cor de fundo
-            ),
             child: Text(
               'Clear',
               style: TextStyle(fontSize: 24),
