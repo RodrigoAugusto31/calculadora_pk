@@ -107,9 +107,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget _buildButton(String label, Function() onPressed) {
     return Expanded(
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.yellow, // Definindo a cor de fundo
-      ),
         child: Text(
           label,
           style: TextStyle(fontSize: 24),
