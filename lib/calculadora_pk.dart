@@ -17,6 +17,7 @@ class CalculatorApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Calculator',
       home: CalculatorScreen(),
+      debugShowCheckedModeBanner:false,
     );
   }
 }
