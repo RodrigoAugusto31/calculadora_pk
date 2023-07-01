@@ -107,6 +107,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget _buildButton(String label, Function() onPressed) {
     return Expanded(
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.yellow,
+        ),
         child: Text(
           label,
           style: TextStyle(fontSize: 24),
@@ -120,8 +123,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Calculator'),
+        title: Text('Calculadora'),
+        backgroundColor: Colors.yellow,
       ),
+      backgroundColor: Colors.yellow[200],
       body: Column(
         children: [
           Expanded(
@@ -171,8 +176,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             ],
           ),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.yellow,
+            ),
             child: Text(
-              'Clear',
+              'Limpar',
               style: TextStyle(fontSize: 24),
             ),
             onPressed: _handleClearPress,
