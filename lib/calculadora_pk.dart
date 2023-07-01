@@ -15,6 +15,7 @@ class CalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.yellow),
       title: 'Flutter Calculator',
       home: CalculatorScreen(),
     );
@@ -123,7 +124,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.yellow,
         title: Text('Flutter Calculator'),
       ),
       body: Column(
@@ -174,9 +174,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('+', () => _handleOperatorPress('+')),
             ],
           ),
-          ElevatedButton(style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.yellow, // Definindo a cor de fundo
-      ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.yellow, // Definindo a cor de fundo
+            ),
             child: Text(
               'Clear',
               style: TextStyle(fontSize: 24),
