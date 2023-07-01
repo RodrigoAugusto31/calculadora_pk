@@ -108,7 +108,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     return Expanded(
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.yellow[200], // Definindo a cor de fundo
+        backgroundColor: Colors.yellow, // Definindo a cor de fundo
       ),
         child: Text(
           label,
@@ -123,6 +123,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.yellow,
         title: Text('Flutter Calculator'),
       ),
       body: Column(
@@ -173,7 +174,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('+', () => _handleOperatorPress('+')),
             ],
           ),
-          ElevatedButton(
+          ElevatedButton(style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.yellow, // Definindo a cor de fundo
+      ),
             child: Text(
               'Clear',
               style: TextStyle(fontSize: 24),
