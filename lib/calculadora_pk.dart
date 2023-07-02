@@ -1,14 +1,17 @@
+library calculadora_pk;
 import 'package:flutter/material.dart';
 
+/// A Calculator.
 class Calculator {
+  /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
 
-  void openCalculator(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => CalculatorApp()),
-    );
-  }
+void openCalculator(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => CalculatorApp()),
+  );
+}
 }
 
 class CalculatorApp extends StatelessWidget {
@@ -17,7 +20,7 @@ class CalculatorApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Calculator',
       home: CalculatorScreen(),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner:false,
     );
   }
 }
@@ -65,7 +68,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = operator;
       _currentValue = '';
-      _displayValue = _result.toString() + ' ' + _operator;
     }
   }
 
@@ -90,7 +92,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = '';
       _currentValue = '';
-      _displayValue = _result.toString();
     }
 
     setState(() {
@@ -112,24 +113,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: Colors.yellow,
-        ),
-        child: Text(
-          label,
-          style: TextStyle(fontSize: 24),
-        ),
-        onPressed: onPressed,
-      ),
-    );
-  }
-
-  Widget _buildOperatorButton(String label, Function() onPressed) {
-    return Expanded(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.yellow,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0),
-          ),
         ),
         child: Text(
           label,
@@ -169,7 +152,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('7', () => _handleNumberPress('7')),
               _buildButton('8', () => _handleNumberPress('8')),
               _buildButton('9', () => _handleNumberPress('9')),
-              _buildOperatorButton('/', () => _handleOperatorPress('/')),
+              _buildButton('/', () => _handleOperatorPress('/')),
             ],
           ),
           Row(
@@ -177,7 +160,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('4', () => _handleNumberPress('4')),
               _buildButton('5', () => _handleNumberPress('5')),
               _buildButton('6', () => _handleNumberPress('6')),
-              _buildOperatorButton('*', () => _handleOperatorPress('*')),
+              _buildButton('*', () => _handleOperatorPress('*')),
             ],
           ),
           Row(
@@ -185,7 +168,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('1', () => _handleNumberPress('1')),
               _buildButton('2', () => _handleNumberPress('2')),
               _buildButton('3', () => _handleNumberPress('3')),
-              _buildOperatorButton('-', () => _handleOperatorPress('-')),
+              _buildButton('-', () => _handleOperatorPress('-')),
             ],
           ),
           Row(
@@ -193,7 +176,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('0', () => _handleNumberPress('0')),
               _buildButton('.', () => _handleNumberPress('.')),
               _buildButton('=', _handleEqualsPress),
-              _buildOperatorButton('+', () => _handleOperatorPress('+')),
+              _buildButton('+', () => _handleOperatorPress('+')),
             ],
           ),
           ElevatedButton(
@@ -211,3 +194,4 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 }
+
