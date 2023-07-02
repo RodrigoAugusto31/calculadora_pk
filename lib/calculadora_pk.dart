@@ -52,26 +52,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       } else {
         switch (_operator) {
           case '+':
-          setState(() {
-            _displayValue = "$_currentValue+aaaaa";
-          });
             _result += value;
             break;
           case '-':
-          setState(() {
-            _displayValue = "$_currentValue-";
-          });
             _result -= value;
             break;
-          case '*':setState(() {
-            _displayValue = "$_currentValue*";
-          });
+          case '*':
             _result *= value;
             break;
           case '/':
-          setState(() {
-            _displayValue = "$_currentValue/";
-          });
             _result /= value;
             break;
         }
