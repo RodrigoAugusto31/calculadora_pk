@@ -35,46 +35,23 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String _displayValue = '0';
   double _result = 0;
   String _operator = '';
+  String _expression = '';
 
   void _handleNumberPress(String number) {
-    setState(() {
-      _currentValue += number;
-      _displayValue = _currentValue;
-    });
-  }
+  setState(() {
+    _currentValue += number;
+    _expression += number;
+    _displayValue = _currentValue;
+  });
+}
 
   void _handleOperatorPress(String operator) {
-    if (_currentValue.isNotEmpty) {
-      double value = double.parse(_currentValue);
+  if (_currentValue.isNotEmpty) {
+    double value = double.parse(_currentValue);
 
-      if (_operator.isEmpty) {
-        _result = value;
-      } else {
-        switch (_operator) {
-          case '+':
-            _result += value;
-            break;
-          case '-':
-            _result -= value;
-            break;
-          case '*':
-            _result *= value;
-            break;
-          case '/':
-            _result /= value;
-            break;
-        }
-      }
-
-      _operator = operator;
-      _currentValue = '';
-    }
-  }
-
-  void _handleEqualsPress() {
-    if (_currentValue.isNotEmpty) {
-      double value = double.parse(_currentValue);
-
+    if (_operator.isEmpty) {
+      _result = value;
+    } else {
       switch (_operator) {
         case '+':
           _result += value;
@@ -89,15 +66,42 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           _result /= value;
           break;
       }
-
-      _operator = '';
-      _currentValue = '';
     }
 
-    setState(() {
-      _displayValue = _result.toString();
-    });
+    _operator = operator;
+    _currentValue = '';
+    _expression += operator + ' ';
   }
+}
+
+  void _handleEqualsPress() {
+  if (_currentValue.isNotEmpty) {
+    double value = double.parse(_currentValue);
+
+    switch (_operator) {
+      case '+':
+        _result += value;
+        break;
+      case '-':
+        _result -= value;
+        break;
+      case '*':
+        _result *= value;
+        break;
+      case '/':
+        _result /= value;
+        break;
+    }
+
+    _operator = '';
+    _currentValue = '';
+    _expression = _result.toString();
+  }
+
+  setState(() {
+    _displayValue = _expression;
+  });
+}
 
   void _handleClearPress() {
     setState(() {
@@ -131,18 +135,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         backgroundColor: Colors.yellow,
       ),
       backgroundColor: Colors.yellow[200],
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(16),
-              alignment: Alignment.bottomRight,
-              child: Text(
-                _displayValue,
-                style: TextStyle(fontSize: 48),
-              ),
+   body: Column(
+      children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(16),
+            alignment: Alignment.bottomRight,
+            child: Text(
+              _expression,
+              style: TextStyle(fontSize: 24),
             ),
           ),
+        ),
           Divider(
             height: 0,
             thickness: 2,
