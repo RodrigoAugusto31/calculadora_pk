@@ -109,6 +109,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _displayValue = '0';
       _result = 0;
       _operator = '';
+      _expression = '';
     });
   }
 
