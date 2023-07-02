@@ -68,36 +68,40 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = operator;
       _currentValue = '';
+
+      setState(() {
+      _displayValue = '$_result $operator';
+    });
     }
   }
 
   void _handleEqualsPress() {
-    if (_currentValue.isNotEmpty) {
-      double value = double.parse(_currentValue);
+  if (_currentValue.isNotEmpty) {
+    double value = double.parse(_currentValue);
 
-      switch (_operator) {
-        case '+':
-          _result += value;
-          break;
-        case '-':
-          _result -= value;
-          break;
-        case '*':
-          _result *= value;
-          break;
-        case '/':
-          _result /= value;
-          break;
-      }
-
-      _operator = '';
-      _currentValue = '';
+    switch (_operator) {
+      case '+':
+        _result += value;
+        break;
+      case '-':
+        _result -= value;
+        break;
+      case '*':
+        _result *= value;
+        break;
+      case '/':
+        _result /= value;
+        break;
     }
 
-    setState(() {
-      _displayValue = _result.toString();
-    });
+    _operator = '';
+    _currentValue = '';
   }
+
+  setState(() {
+    _displayValue = _result.toString();
+  });
+}
 
   void _handleClearPress() {
     setState(() {
