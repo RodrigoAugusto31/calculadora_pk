@@ -70,7 +70,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     _operator = operator;
     _currentValue = '';
-    _expression += operator + ' ';
+    _expression += operator;
   }
 }
 
