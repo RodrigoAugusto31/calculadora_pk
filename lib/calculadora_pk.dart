@@ -1,14 +1,17 @@
+library calculadora_pk;
 import 'package:flutter/material.dart';
 
+/// A Calculator.
 class Calculator {
+  /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
 
-  void openCalculator(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => CalculatorApp()),
-    );
-  }
+void openCalculator(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => CalculatorApp()),
+  );
+}
 }
 
 class CalculatorApp extends StatelessWidget {
@@ -17,7 +20,7 @@ class CalculatorApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Calculator',
       home: CalculatorScreen(),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner:false,
     );
   }
 }
@@ -32,7 +35,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String _displayValue = '0';
   double _result = 0;
   String _operator = '';
-  String _operation = '';
 
   void _handleNumberPress(String number) {
     setState(() {
@@ -42,12 +44,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   void _handleOperatorPress(String operator) {
-    setState(() {
-      _operation += _currentValue;
-      _operation += operator;
-      _currentValue = '';
-    });
-
     if (_currentValue.isNotEmpty) {
       double value = double.parse(_currentValue);
 
@@ -94,7 +90,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           break;
       }
 
-      _operation += _currentValue;
       _operator = '';
       _currentValue = '';
     }
@@ -110,7 +105,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _displayValue = '0';
       _result = 0;
       _operator = '';
-      _operation = '';
     });
   }
 
@@ -124,10 +118,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           label,
           style: TextStyle(fontSize: 24),
         ),
-        onPressed: () {
-          _operation += label;
-          onPressed();
-        },
+        onPressed: onPressed,
       ),
     );
   }
@@ -146,20 +137,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             child: Container(
               padding: EdgeInsets.all(16),
               alignment: Alignment.bottomRight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    _operation,
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    _displayValue,
-                    style: TextStyle(fontSize: 48),
-                  ),
-                ],
+              child: Text(
+                _displayValue,
+                style: TextStyle(fontSize: 48),
               ),
             ),
           ),
@@ -207,13 +187,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               'Limpar',
               style: TextStyle(fontSize: 24),
             ),
-            onPressed: () {
-              _operation = '';
-              _handleClearPress();
-            },
+            onPressed: _handleClearPress,
           ),
         ],
       ),
     );
   }
 }
+
