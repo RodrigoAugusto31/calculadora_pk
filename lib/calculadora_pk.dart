@@ -122,6 +122,23 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 
+  Widget _buildOperatorButton(String label, Function() onPressed) {
+    return Expanded(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.yellow,
+        ),
+        child: Text(
+          label,
+          style: TextStyle(fontSize: 24),
+        ),
+        onPressed: () {
+          _handleOperatorPress(label);
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,7 +168,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('7', () => _handleNumberPress('7')),
               _buildButton('8', () => _handleNumberPress('8')),
               _buildButton('9', () => _handleNumberPress('9')),
-              _buildButton('/', () => _handleOperatorPress('/')),
+              _buildOperatorButton('/', () => _handleOperatorPress('/')),
             ],
           ),
           Row(
@@ -159,7 +176,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('4', () => _handleNumberPress('4')),
               _buildButton('5', () => _handleNumberPress('5')),
               _buildButton('6', () => _handleNumberPress('6')),
-              _buildButton('*', () => _handleOperatorPress('*')),
+              _buildOperatorButton('*', () => _handleOperatorPress('*')),
             ],
           ),
           Row(
@@ -167,7 +184,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('1', () => _handleNumberPress('1')),
               _buildButton('2', () => _handleNumberPress('2')),
               _buildButton('3', () => _handleNumberPress('3')),
-              _buildButton('-', () => _handleOperatorPress('-')),
+              _buildOperatorButton('-', () => _handleOperatorPress('-')),
             ],
           ),
           Row(
@@ -175,7 +192,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('0', () => _handleNumberPress('0')),
               _buildButton('.', () => _handleNumberPress('.')),
               _buildButton('=', _handleEqualsPress),
-              _buildButton('+', () => _handleOperatorPress('+')),
+              _buildOperatorButton('+', () => _handleOperatorPress('+')),
             ],
           ),
           ElevatedButton(
