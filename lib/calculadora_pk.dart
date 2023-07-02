@@ -65,7 +65,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = operator;
       _currentValue = '';
-      _displayValue = '$_result $operator';
+      _displayValue = _result.toString() + ' ' + _operator;
     }
   }
 
@@ -127,14 +127,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: Colors.yellow,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
         ),
         child: Text(
           label,
           style: TextStyle(fontSize: 24),
         ),
-        onPressed: () {
-          _handleOperatorPress(label);
-        },
+        onPressed: onPressed,
       ),
     );
   }
