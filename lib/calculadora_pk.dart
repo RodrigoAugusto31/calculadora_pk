@@ -43,6 +43,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   void _handleOperatorPress(String operator) {
+    setState(() {
+      _operation += operator;
+    });
+
     if (_currentValue.isNotEmpty) {
       double value = double.parse(_currentValue);
 
@@ -67,7 +71,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = operator;
       _currentValue = '';
-      _operation += ' $operator ';
     }
   }
 
@@ -120,7 +123,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           label,
           style: TextStyle(fontSize: 24),
         ),
-        onPressed: onPressed,
+        onPressed: () {
+          _operation += label;
+          onPressed();
+        },
       ),
     );
   }
@@ -200,7 +206,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               'Limpar',
               style: TextStyle(fontSize: 24),
             ),
-            onPressed: _handleClearPress,
+            onPressed: () {
+              _operation = '';
+              _handleClearPress();
+            },
           ),
         ],
       ),
