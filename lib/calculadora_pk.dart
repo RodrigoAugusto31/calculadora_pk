@@ -1,4 +1,3 @@
-library calculadora_pk;
 import 'package:flutter/material.dart';
 
 /// A Calculator.
@@ -6,12 +5,12 @@ class Calculator {
   /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
 
-void openCalculator(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => CalculatorApp()),
-  );
-}
+  void openCalculator(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CalculatorApp()),
+    );
+  }
 }
 
 class CalculatorApp extends StatelessWidget {
@@ -68,6 +67,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = operator;
       _currentValue = '';
+      _displayValue = '$_result $operator';
     }
   }
 
@@ -92,6 +92,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = '';
       _currentValue = '';
+      _displayValue = _result.toString();
     }
 
     setState(() {
@@ -194,4 +195,3 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 }
-
