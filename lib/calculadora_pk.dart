@@ -54,19 +54,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     } else {
       switch (_operator) {
         case '+':
-          _expression += operator;
           _result += value;
           break;
         case '-':
-        _expression += operator;
           _result -= value;
           break;
         case '*':
-        _expression += operator;
           _result *= value;
           break;
         case '/':
-        _expression += operator;
           _result /= value;
           break;
       }
@@ -74,6 +70,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     _operator = operator;
     _currentValue = '';
+    _expression += operator;
   }
 }
 
