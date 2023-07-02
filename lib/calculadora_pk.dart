@@ -1,4 +1,3 @@
-library calculadora_pk;
 import 'package:flutter/material.dart';
 
 /// A Calculator.
@@ -6,12 +5,12 @@ class Calculator {
   /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
 
-void openCalculator(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => CalculatorApp()),
-  );
-}
+  void openCalculator(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CalculatorApp()),
+    );
+  }
 }
 
 class CalculatorApp extends StatelessWidget {
@@ -20,7 +19,7 @@ class CalculatorApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Calculator',
       home: CalculatorScreen(),
-      debugShowCheckedModeBanner:false,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -35,6 +34,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String _displayValue = '0';
   double _result = 0;
   String _operator = '';
+  double _previousValue = 0;
 
   void _handleNumberPress(String number) {
     setState(() {
@@ -47,35 +47,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     if (_currentValue.isNotEmpty) {
       double value = double.parse(_currentValue);
 
-      if (_operator.isEmpty) {
-        _result = value;
-      } else {
-        switch (_operator) {
-          case '+':
-            _result += value;
-            break;
-          case '-':
-            _result -= value;
-            break;
-          case '*':
-            _result *= value;
-            break;
-          case '/':
-            _result /= value;
-            break;
-        }
-      }
-
-      _operator = operator;
-      _currentValue = '';
-    }
-  }
-
-  void _handleEqualsPress() {
-    if (_currentValue.isNotEmpty) {
-      double value = double.parse(_currentValue);
-
       switch (_operator) {
+        case '':
+          _result = value;
+          break;
         case '+':
           _result += value;
           break;
@@ -90,13 +65,76 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           break;
       }
 
-      _operator = '';
+      _operator = operator;
+      _displayValue = _result.toString();
       _currentValue = '';
     }
+  }
 
-    setState(() {
+  void _handlePercentagePress() {
+    if (_currentValue.isNotEmpty) {
+      double value = double.parse(_currentValue);
+      value /= 100;
+      _currentValue = value.toString();
+      _displayValue = _currentValue;
+    }
+  }
+
+  void _handleNegatePress() {
+    if (_currentValue.isNotEmpty) {
+      double value = double.parse(_currentValue);
+      value = -value;
+      _currentValue = value.toString();
+      _displayValue = _currentValue;
+    }
+  }
+
+  void _handleEqualsPress() {
+    if (_currentValue.isNotEmpty) {
+      double value = double.parse(_currentValue);
+
+      switch (_operator) {
+        case '':
+          _result = value;
+          break;
+        case '+':
+          _result += value;
+          break;
+        case '-':
+          _result -= value;
+          break;
+        case '*':
+          _result *= value;
+          break;
+        case '/':
+          _result /= value;
+          break;
+      }
+
       _displayValue = _result.toString();
-    });
+      _operator = '';
+      _currentValue = '';
+    } else {
+      if (_previousValue != 0) {
+        switch (_operator) {
+          case '+':
+            _result += _previousValue;
+            break;
+          case '-':
+            _result -= _previousValue;
+            break;
+          case '*':
+            _result *= _previousValue;
+            break;
+          case '/':
+            _result /= _previousValue;
+            break;
+        }
+
+        _displayValue = _result.toString();
+        _operator = '';
+      }
+    }
   }
 
   void _handleClearPress() {
@@ -105,6 +143,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _displayValue = '0';
       _result = 0;
       _operator = '';
+      _previousValue = 0;
     });
   }
 
@@ -149,10 +188,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           ),
           Row(
             children: [
+              _buildButton('C', _handleClearPress),
+              _buildButton('+/-', _handleNegatePress),
+              _buildButton('%', _handlePercentagePress),
+              _buildButton('/', () => _handleOperatorPress('/')),
+            ],
+          ),
+          Row(
+            children: [
               _buildButton('7', () => _handleNumberPress('7')),
               _buildButton('8', () => _handleNumberPress('8')),
               _buildButton('9', () => _handleNumberPress('9')),
-              _buildButton('/', () => _handleOperatorPress('/')),
+              _buildButton('*', () => _handleOperatorPress('*')),
             ],
           ),
           Row(
@@ -160,7 +207,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('4', () => _handleNumberPress('4')),
               _buildButton('5', () => _handleNumberPress('5')),
               _buildButton('6', () => _handleNumberPress('6')),
-              _buildButton('*', () => _handleOperatorPress('*')),
+              _buildButton('-', () => _handleOperatorPress('-')),
             ],
           ),
           Row(
@@ -168,7 +215,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('1', () => _handleNumberPress('1')),
               _buildButton('2', () => _handleNumberPress('2')),
               _buildButton('3', () => _handleNumberPress('3')),
-              _buildButton('-', () => _handleOperatorPress('-')),
+              _buildButton('+', () => _handleOperatorPress('+')),
             ],
           ),
           Row(
@@ -176,22 +223,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton('0', () => _handleNumberPress('0')),
               _buildButton('.', () => _handleNumberPress('.')),
               _buildButton('=', _handleEqualsPress),
-              _buildButton('+', () => _handleOperatorPress('+')),
             ],
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.yellow,
-            ),
-            child: Text(
-              'Limpar',
-              style: TextStyle(fontSize: 24),
-            ),
-            onPressed: _handleClearPress,
           ),
         ],
       ),
     );
   }
 }
-
