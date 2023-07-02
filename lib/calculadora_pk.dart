@@ -32,13 +32,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String _displayValue = '0';
   double _result = 0;
   String _operator = '';
-  String _expression = '';
+  String _operation = '';
 
   void _handleNumberPress(String number) {
     setState(() {
       _currentValue += number;
       _displayValue = _currentValue;
-      _expression += number;
+      _operation += number;
     });
   }
 
@@ -67,7 +67,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = operator;
       _currentValue = '';
-      _expression += ' $operator ';
+      _operation += ' $operator ';
     }
   }
 
@@ -92,7 +92,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
       _operator = '';
       _currentValue = '';
-      _expression = '';
+      _operation = '';
     }
 
     setState(() {
@@ -106,7 +106,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _displayValue = '0';
       _result = 0;
       _operator = '';
-      _expression = '';
+      _operation = '';
     });
   }
 
@@ -144,7 +144,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    _expression,
+                    _operation,
                     style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(height: 16),
