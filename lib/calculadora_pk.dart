@@ -38,13 +38,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     setState(() {
       _currentValue += number;
       _displayValue = _currentValue;
-      _operation += number;
     });
   }
 
   void _handleOperatorPress(String operator) {
     setState(() {
+      _operation += _currentValue;
       _operation += operator;
+      _currentValue = '';
     });
 
     if (_currentValue.isNotEmpty) {
@@ -93,9 +94,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           break;
       }
 
+      _operation += _currentValue;
       _operator = '';
       _currentValue = '';
-      _operation = '';
     }
 
     setState(() {
